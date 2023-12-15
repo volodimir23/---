@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <img id="img-view" src="" alt="Зображення">
+    <button id="btn-back">Назад</button>
+    <button id="btn-forward">Вперед</button>
+
+    <script>
+        let imgArray = ["1.jpg", "2.jpg", "3.jpg"];
+        let idx = 0;
+
+        const imgView = document.getElementById('img-view');
+        const btnBack = document.getElementById('btn-back');
+        const btnForward = document.getElementById('btn-forward');
+
+        function showImage() {
+            imgView.src = imgArray[idx];
+        }
+
+        showImage();
+
+        btnBack.addEventListener('click', function() {
+            idx = (idx - 1 + imgArray.length) % imgArray.length;
+            showImage();
+        });
+
+        btnForward.addEventListener('click', function() {
+            idx = (idx + 1) % imgArray.length;
+            showImage();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .custom-space {
+            width: 150px;
+            height: 20px;
+            margin-left: 45px;
+        }
+    </style>
+</head>
+<body onload="initializeCustomKeyboard()">
+    <div id="customKeyboard"></div>
+    <br>
+    <textarea id="customDisplay" rows="4" cols="50"></textarea>
+    <br>
+    <button onclick="clearCustomDisplay()">Очистити</button>
+    <script>
+        let customLanguage = "ua";
+        const customLetters_ua = ["й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ї", "ф", "і", "в", "а", "п", "р", "о", "л", "д", "ж", "є", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю"];
+
+        function initializeCustomKeyboard(customLetters = customLetters_ua) {
+            let customKeys = "";
+            customLetters.map((customKey, index) => {
+                if (index % 11 === 0) {
+                    customKeys += "<br>";
+                }
+                customKeys += `<button onclick="addCustomSymbol('${customKey}')">${customKey}</button>`;
+            });
+            customKeys += "<br>";
+            customKeys += `<button class="custom-space" onclick="addCustomSymbol(' ')">Пробіл</button>`;
+
+            customKeyboard.innerHTML = customKeys;
+        }
+
+        function clearCustomDisplay() {
+            document.getElementById('customDisplay').value = "";
+        }
+
+        function addCustomSymbol(customKey) {
+            document.getElementById('customDisplay').value += customKey;
+        }
+    </script>
+</body>
+</html>

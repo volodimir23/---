@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <h2>Завдання 3.1</h2>
+    <p>"Snake case" в стилі "Lower camel case"</p>
+    <input type="text" id="in3.1" />
+
+    <button onclick="fun3_1()">Перетворити</button>
+
+    <p id="out3_1"></p>
+
+    <h2>Завдання 3.2</h2>
+    <p>"lower camel case" в стилі "Snake case"</p>
+
+    <input type="text" id="in3.2" />
+    <button onclick="fun3_2()">Перетворити</button>
+
+    <p id="out3.2"></p>
+
+    <h2>Завдання 3.3</h2>
+    <p>Замінити всі дати формату yyyy/mm/dd на формат dd.mm.yyyy</p>
+    <textarea id="in3.3"></textarea><br />
+    <button onclick="fun3_3()">Результат</button><br />
+    <div id="out3.3"></div>
+    <script>
+        function fun3_1() {
+            let a = document.getElementById("in3.1").value;
+            let b = a.split("_");
+            let c = b[0];
+            for (let i = 1; i < b.length; i++) {
+            c += b[i][0].toUpperCase() + b[i].slice(1);
+            }
+            document.getElementById("out3_1").innerHTML = c;
+        }
+    
+        function fun3_2() {
+            let a = document.getElementById("in3.2").value;
+            let b = a.split("");
+            let c = b[0].toLowerCase();
+            for (let i = 1; i < b.length; i++) {
+            if (b[i] == b[i].toUpperCase()) {
+                c += "_" + b[i].toLowerCase();
+            } else {
+                c += b[i];
+            }
+            }
+            document.getElementById("out3.2").innerHTML = c;
+        }
+    
+        function fun3_3() {
+            let a = document.getElementById("in3.3").value;
+            let b = a.split(" ");
+            let c = [];
+            for (let i = 0; i < b.length; i++) {
+            if (b[i].match(/\d{4}\/\d{2}\/\d{2}/)) {
+                let d = b[i].split("/");
+                c.push(d[2] + "." + d[1] + "." + d[0]);
+            } else {
+                c.push(b[i]);
+            }
+            }
+            document.getElementById("out3.3").innerHTML = c.join(" ");
+        }
+    </script>
+  </body>
+</html>

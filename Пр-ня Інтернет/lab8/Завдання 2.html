@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання №2</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 20px; padding: 20px; }
+        h2 { color: #333; }
+        button, input { padding: 8px; margin: 5px; cursor: pointer; }
+        button { background-color: #ccc; border: none; }
+    </style>
+</head>
+
+<body>
+    <h2>Завдання 2.1. Виведення поточної дати, дня тижня і часу</h2>
+    <button onclick="calendar()">Виконати</button>
+    <p id="date"></p>
+    <p id="day"></p>
+    <p id="time"></p>
+
+    <script>
+        function calendar() {
+            const now = new Date(), year = now.getFullYear(), month = now.getMonth(), dayOfMonth = now.getDate(),
+                hour = now.getHours(), minute = now.getMinutes(), weekdays = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п'ятниця", "субота"],
+                months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"],
+                dayOfWeek = weekdays[now.getDay()], monthName = months[month];
+            document.getElementById('date').textContent = `Дата: ${dayOfMonth} ${monthName} ${year} року`;
+            document.getElementById('day').textContent = `День тижня: ${dayOfWeek}`;
+            document.getElementById('time').textContent = `Час: ${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}`;
+            setTimeout(calendar, 60000);
+        }
+    </script>
+
+<h2>Завдання 2.2.Виведення дня і номера тижня</h2>
+<button onclick="dayInfo()">Виконати</button>
+<p id="dayNumber"></p>
+<p id="dayName"></p>
+
+<script>
+    const dayInfo = () => {
+        const now = new Date();
+        const dayOfWeek = ["неділя", "понеділок", "вівторок", "середа", "четвер", "п'ятниця", "субота"][now.getDay()];
+        const dayNumber = now.getDay() === 0 ? 7 : now.getDay();
+        document.getElementById('dayNumber').textContent = `Номер дня тижня: ${dayNumber}`;
+        document.getElementById('dayName').textContent = `Назва дня тижня: ${dayOfWeek}`;
+    }
+</script>
+
+<h2>Завдання 2.3.Знайти дату, яка була N днів назад чи вперед</h2>
+<input type="number" id="days" placeholder="Введіть кількість днів">
+<button onclick="findDate()">Виконати</button>
+<p id="result1"></p>
+
+<script>
+    const findDate = () => {
+        const days = document.getElementById('days').value;
+        const now = new Date();
+        now.setDate(now.getDate() + Number(days));
+        const year = now.getFullYear();
+        const month = now.getMonth();
+        let day = now.getDate();
+        const months = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
+        const monthName = months[month];
+        day = day < 10 ? '0' + day : day;
+        const resultText = days >= 0 ? "Майбутня дата: " : "Минула дата: ";
+        document.getElementById('result1').textContent = `${resultText}${day} ${monthName} ${year} року`;
+    }
+</script>
+
+<h2>Завдання 2.4.Останній день місяця та час в секундах</h2>
+<input type="number" id="yearInput" placeholder="Введіть рік">
+<input type="number" id="monthInput" placeholder="Введіть номер місяця (1 - січень, 2 - лютий, і т.д.)">
+<button onclick="getLastDay()">Виконати</button>
+<p id="lastDayResult"></p>
+
+<h2>Завдання 2.5.Час в секундах</h2>
+<p id="sinceMidnight"></p>
+<p id="untilNextDay"></p>
+
+<script>
+    function getLastDay() {
+        const year = document.getElementById('yearInput').value;
+        const month = document.getElementById('monthInput').value;
+        const lastDayOfMonth = new Date(year, Number(month), 0).getDate();
+        document.getElementById('lastDayResult').textContent = `Останній день місяця: ${lastDayOfMonth}`;
+    }
+
+    function updateSeconds() {
+        const currentTime = new Date();
+        const secondsPassed = currentTime.getHours() * 3600 + currentTime.getMinutes() * 60 + currentTime.getSeconds();
+        document.getElementById('sinceMidnight').textContent = `Секунд від початку дня: ${secondsPassed}`;
+        document.getElementById('untilNextDay').textContent = `Секунд до початку наступного дня: ${86400 - secondsPassed}`;
+    }  
+    getLastDay();
+    updateSeconds();
+    setInterval(updateSeconds, 1000);
+</script>
+
+<h2>Завдання 2.6</h2>
+<label for="userInput">Введіть дату та час у форматі 'дд.мм.рррр год:хв': </label>
+<input type="text" id="userInput">
+<button onclick="formatTimeAgo()">Форматувати</button>
+<p id="result"></p>
+<script>
+    function formatTimeAgo() {
+        const userInput = document.getElementById("userInput").value;
+        const result = formatTimeAgoPython(userInput);
+        document.getElementById("result").innerHTML = result;
+    }
+    function formatTimeAgoPython(input_str) {
+        const dateTimeParts = input_str.split(' год:');
+
+        const datePart = dateTimeParts[0];
+        const [day, month, year] = datePart.split('.');
+        
+        const timePart = dateTimeParts[1];
+        const [hours, minutes] = timePart.split(':');
+
+        const formattedDate = `${year}-${month}-${day}`;
+        const formattedTime = `${hours}:${minutes}`;
+
+        return `Форматована дата та час: ${formattedDate} ${formattedTime}`;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виклик №5</title>
+</head>
+<body>
+    <p id="рахунок">Ваш рахунок: 0 балів</p>
+    <p id="питання"></p>
+    <input type="text" id="відповідь" placeholder="Введіть вашу відповідь тут">
+    <button id="перевірити">Перевірити</button>
+    <p id="результат"></p>
+    <button id="наступне">Наступне питання</button>
+    <script>
+        let рахунок = 0;
+        let номерПитання = 1;
+
+        function генеруватиПитання() {
+            let число1 = Math.floor(Math.random() * 10);
+            let число2 = Math.floor(Math.random() * 10);
+
+            document.getElementById("питання").innerHTML = число1 + " x " + число2 + " = ?";
+
+            let правильнаВідповідь = число1 * число2;
+
+            document.getElementById("перевірити").onclick = function() {
+                let відповідьКористувача = parseInt(document.getElementById("відповідь").value);
+
+                if (!isNaN(відповідьКористувача)) {
+                    if (відповідьКористувача === правильнаВідповідь) {
+                        document.getElementById("результат").innerHTML = "Правильно!";
+                        рахунок++;
+                    } else {
+                        document.getElementById("результат").innerHTML = "Помилка. Правильна відповідь: " + правильнаВідповідь;
+                    }
+                    document.getElementById("рахунок").innerHTML = "Ваш рахунок: " + рахунок + " балів";
+                    document.getElementById("перевірити").disabled = true;
+                    document.getElementById("наступне").disabled = false;
+                } else {
+                    alert("Введіть коректну відповідь");
+                }
+            }
+
+            document.getElementById("наступне").onclick = function() {
+                if (номерПитання === 10) {
+                    alert("Тест завершено! Ваш кінцевий рахунок: " + рахунок + " балів");
+                    return;
+                }
+                document.getElementById("відповідь").value = "";
+                document.getElementById("результат").innerHTML = "";
+                document.getElementById("перевірити").disabled = false;
+                document.getElementById("наступне").disabled = true;
+                номерПитання++;
+                генеруватиПитання();
+            }
+        }
+
+        генеруватиПитання();
+    </script>
+</body>
+</html>

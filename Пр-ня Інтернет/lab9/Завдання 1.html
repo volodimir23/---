@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Загадкове завдання</title>
+</head>
+<style>
+  #train {
+    position: relative;
+    cursor: pointer;
+  }
+  progress {
+    width: 5%;
+  }
+  .brick {
+    width: 40px;
+    height: 20px;
+    background: #EE6B47;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .path {
+    outline: 1px solid #E8C48E;
+    width: 540px;
+    height: 20px;
+  }
+  textarea {
+    display: block;
+    border: 1px solid #BBB;
+    color: #444;
+    font-size: 110%;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+  <h2>Використання setInterval</h2>
+<img id="train" src="https://js.cx/clipart/train.gif">
+<script>
+  train.onclick = function() {
+    let start = Date.now();
+
+    let timer = setInterval(function() {
+      let timePassed = Date.now() - start;
+
+      train.style.left = timePassed / 5 + 'px';
+
+      if (timePassed > 2000) clearInterval(timer);
+
+    }, 20);
+  }
+</script>
+<h2>Структурована анімація</h2>
+<progress id="elem"></progress>
+
+<script>
+ function animate({ timing, draw, duration }) {
+   let start = performance.now();
+
+   requestAnimationFrame(function animate(time) {
+     let timeFraction = (time - start) / duration;
+     if (timeFraction > 1) timeFraction = 1;
+
+     let progress = timing(timeFraction);
+     draw(progress);
+
+     if (timeFraction < 1) {
+       requestAnimationFrame(animate);
+     }
+   });
+ }
+
+ let elem = document.getElementById('elem');
+
+ elem.addEventListener('click', function () {
+   animate({
+     duration: 1000,
+     timing(timeFraction) {
+       return timeFraction;
+     },
+     draw(progress) {
+       elem.style.width = progress * 100 + '%';
+     }
+   });
+ });
+</script>
+
+<h2>Функції часу (timing functions)</h2>
+
+<h3>Степінь n</h3>
+<div id="path1" class="path">
+<div id="brick1" class="brick"></div>
+</div>
+
+<script>
+document.getElementById('brick1').onclick = function() {
+  animate({
+    duration: 1000,
+    timing: function(timeFraction) {
+      return Math.pow(timeFraction, 2);
+    },
+    draw: function(progress) {
+      document.getElementById('brick1').style.left = progress * 500 + 'px';
+    }
+  });
+};
+</script>
+
+<h3>Дуга</h3>
+<div id="path2" class="path">
+<div id="brick2" class="brick"></div>
+</div>
+
+<script>
+document.getElementById('brick2').onclick = function() {
+  animate({
+    duration: 1000,
+    timing: function circ(timeFraction) {
+      return 1 - Math.sin(Math.acos(timeFraction));
+    },
+    draw: function(progress) {
+      document.getElementById('brick2').style.left = progress * 500 + 'px';
+    }
+  });
+};
+</script>
+
+<h3>Back: стрільба з лука</h3>
+<div id="path3" class="path">
+<div id="brick3" class="brick"></div>
+</div>
+
+<script>
+document.getElementById('brick3').onclick = function() {
+  animate({
+    duration: 1000,
+    timing: function back(x, timeFraction) {
+      return Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x);
+    }.bind(null, 1.5),
+    draw: function(progress) {
+      document.getElementById('brick3').style.left = progress * 500 + 'px';
+    }
+  });
+};
+</script>
+
+<h3>Відскок</h3>
+<div id="path4" class="path">
+<div id="brick4" class="brick"></div>
+</div>
+
+<script>
+document.getElementById('brick4').onclick = function() {
+  animate({
+    duration: 3000,
+    timing: function bounce(timeFraction) {
+      for (let a = 0, b = 1; 1; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+          return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+        }
+      }
+    },
+    draw: function(progress) {
+      document.getElementById('brick4').style.left = progress * 500 + 'px';
+    }
+  });
+};
+</script>
+
+<h3>Еластична анімація</h3>
+<div id="path5" class="path">
+<div id="brick5" class="brick"></div>
+</div>
+
+<script>
+document.getElementById('brick5').onclick = function() {
+  animate({
+    duration: 3000,
+    timing: function elastic(x, timeFraction) {
+      return Math.pow(2, 10 * (timeFraction - 1)) * Math.cos(20 * Math.PI * x / 3 * timeFraction)
+    }.bind(null, 1.5),
+    draw: function(progress) {
+      document.getElementById('brick5').style.left = progress * 500 + 'px';
+    }
+  });
+};
+</script>
+
+<h2>Реверс: ease*</h2>
+<h3>easeOut</h3>
+<div id="path6" class="path">
+<div id="brick6" class="brick"></div>
+</div>
+
+<script>
+function makeEaseOut(timing) {
+  return function(timeFraction) {
+    return 1 - timing(1 - timeFraction);
+  }
+}
+
+function bounce(timeFraction) {
+  for (let a = 0, b = 1; 1; a += b, b /= 2) {
+    if (timeFraction >= (7 - 4 * a) / 11) {
+      return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+    }
+  }
+}
+
+let bounceEaseOut = makeEaseOut(bounce);
+
+document.getElementById('brick6').onclick = function() {
+  animate({
+    duration: 3000,
+    timing: bounceEaseOut,
+    draw: function(progress) {
+      document.getElementById('brick6').style.left = progress * 500 + 'px';
+    }
+  });
+};
+</script>
+
+<h3>easeInOut</h3>
+<div id="path7" class="path">
+<div id="brick7" class="brick"></div>
+</div>
+
+<script>
+function makeEaseInOut(timing) {
+  return function(timeFraction) {
+    if (timeFraction < .5)
+      return timing(2 * timeFraction) / 2;
+    else
+      return (2 - timing(2 * (1 - timeFraction))) / 2;
+  }
+}
+
+function bounce(timeFraction) {
+  for (let a = 0, b = 1; 1; a += b, b /= 2) {
+    if (timeFraction >= (7 - 4 * a) / 11) {
+      return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+    }
+  }
+}
+
+let bounceEaseInOut = makeEaseInOut(bounce);
+
+document.getElementById('brick7').onclick = function() {
+  animate({
+    duration: 3000,
+    timing: bounceEaseInOut,
+    draw: function(progress) {
+      document.getElementById('brick7').style.left = progress * 500 + 'px';
+    }
+  });
+};
+</script>
+<h2>Функція “draw”</h2>
+<textarea id="textExample" rows="5" cols="60">He took his vorpal sword in hand:
+Long time the manxome foe he sought—
+So rested he by the Tumtum tree,
+And stood awhile in thought.
+  </textarea>
+
+  <button onclick="animateText(textExample)">Run the animated typing!</button>
+
+  <script>
+    function animateText(textArea) {
+      let text = textArea.value;
+      let to = text.length,
+        from = 0;
+
+      animate({
+        duration: 5000,
+        timing: bounce,
+        draw: function(progress) {
+          let result = (to - from) * progress + from;
+          textArea.value = text.slice(0, Math.ceil(result))
+        }
+      });
+    }
+
+
+    function bounce(timeFraction) {
+      for (let a = 0, b = 1; 1; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+          return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+

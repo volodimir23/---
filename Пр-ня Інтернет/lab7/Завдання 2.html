@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h2>Завдання 2.1</h2>
+    <p>Порівняти рядки. 1 - перший рядок, -1 - другий рядок, 0 - однаково</p>
+    <label for="string1">Перший рядок:</label><br />
+    <input type="text" id="string1" name="string1" /><br />
+
+    <label for="string2">Другий рядок:</label><br />
+    <input type="text" id="string2" name="string2" /><br />
+    <button onclick="fun2_1()">Порівняти</button>
+    <p id="task2.1-out"></p>
+
+    <h2>Завдання 2.2</h2>
+    <p>Вивести індекси символа в рядку і їх кількість</p>
+    <label for="str">Рядок:</label><br />
+    <input type="text" id="str" /><br />
+    <label for="char">Символ:</label><br />
+    <input type="text" id="char" /><br />
+    <button onclick="fun2_1()">Підрахувати</button>
+    <p id="task2.2-out"></p>
+
+    <p id="task2.2-out"></p>
+    <h2>Завдання 2.3</h2>
+    <p>Перевести у верхній регістр перший символ рядка</p>
+    <label>Введіть рядок:</label>
+    <input type="text" id="task2.3-in" />
+    <button onclick="fun2_3()">Результат</button>
+    <p id="task2.3-out"></p>
+
+    <h2>Завдання 2.4</h2>
+    <p>Кількість голосних літер у рядку</p>
+    <input type="text" id="task2.4-im" />
+    <button onclick="fun2_4()">Підрахувати</button>
+    <p id="task2.4-out">Кількість голосних:</p>
+
+    <h2>Завдання 2.5</h2>
+    <p>Перевірка на спам</p>
+    <input type="text" id="strInput2.5" />
+    <button onclick="fun2_5()">Перевірити</button>
+    <p id="result2.5">Результат:</p>
+
+    <h2>Завдання 2.6</h2>
+    <p>Скорочення рядка</p>
+    <label for="str6">Рядок:</label><br />
+    <input type="text" id="str6" />
+    <label for="num6">Кількість символів:</label><br />
+    <input type="number" id="num6" />
+    <button onclick="fun2_6()">Скоротити</button>
+    <p id="task2.6-out"></p>
+
+    <script>
+      function fun2_1() {
+        let a = document.getElementById("string1").value;
+        let b = document.getElementById("string2").value;
+        let c = a.localeCompare(b);
+        document.getElementById("task2.1-out").innerHTML = c;
+      }
+
+      function fun2_2() {
+        let a = document.getElementById("str").value;
+        let b = document.getElementById("char").value;
+        let c = a.indexOf(b);
+        let d = a.lastIndexOf(b);
+        let e = a.split(b).length - 1;
+        document.getElementById("task2.2-out").innerHTML =
+          "Перший індекс: " +
+          c +
+          "<br />Останній індекс: " +
+          d +
+          "<br />Кількість: " +
+          e;
+      }
+
+      function fun2_3() {
+        let a = document.getElementById("task2.3-in").value;
+        let b = a.charAt(0).toUpperCase() + a.slice(1);
+        document.getElementById("task2.3-out").innerHTML = b;
+      }
+
+      function fun2_4() {
+        let a = document.getElementById("task2.4-im").value;
+        let b = a.match(/[аоуеиіяюєї]/gi).length;
+        document.getElementById("task2.4-out").innerHTML =
+          "Кількість голосних: " + b;
+      }
+
+      function fun2_5() {
+        let a = document.getElementById("strInput2.5").value;
+        let b = a.match(
+          /(100% безкоштовно|збільшення продажів|тільки сьогодні|не видаляйте)/gi
+        );
+        if (b == null) {
+          document.getElementById("result2.5").innerHTML = "Результат: False";
+        } else {
+          document.getElementById("result2.5").innerHTML = "Результат: True";
+        }
+      }
+
+      function fun2_6() {
+        let a = document.getElementById("str6").value;
+        let b = document.getElementById("num6").value;
+        let c = a.slice(0, b - 3) + "...";
+        document.getElementById("task2.6-out").innerHTML = c;
+      }
+    </script>
+  </body>
+</html>
