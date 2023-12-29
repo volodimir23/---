@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task #2</title>
+  <style>
+    .menu {
+      list-style: none;
+      padding: 0;
+      width: 150px;
+    }
+
+    .menu a {
+      display: block;
+      text-decoration: none;
+      padding: 10px;
+      margin: 2px;
+    }
+
+    .menu .main-item a {
+      color: #000;
+      background-color: #a700a4;
+    }
+
+    .menu .sub-menu a {
+      color: #000;
+      background-color: #ebe70f;
+    }
+
+    .sub-menu {
+      display: none;
+      margin-left: 70px;
+    }
+
+    .sub-menu.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="vertical_menu">
+    <ul class="menu">
+      <li class="main-item">
+        <a href="javascript:showSubMenu('submenu_1')">Item 1</a>
+        <ul id="submenu_1" class="menu sub-menu">
+          <li><a href="">Item 1.1</a></li>
+          <li><a href="">Item 1.2</a></li>
+        </ul>
+      </li>
+      <li class="main-item">
+        <a href="javascript:showSubMenu('submenu_2')">Item 2</a>
+        <ul id="submenu_2" class="menu sub-menu">
+          <li><a href="">Item 2.1</a></li>
+          <li>
+            <a href="javascript:showSubMenu('submenu_2_2')">Item 2.2</a>
+            <ul id="submenu_2_2" class="menu sub-menu">
+              <li><a href="">Item 2.2.1</a></li>
+              <li><a href="">Item 2.2.2</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="main-item">
+        <a href="javascript:showSubMenu('submenu_3')">Item 3</a>
+        </ul>
+      </li>
+  </div>
+
+  <script>
+    function showSubMenu(submenuId) {
+      let submenu = document.getElementById(submenuId);
+      submenu.classList.toggle("active");
+    }
+  </script>
+</body>
+
+</html>

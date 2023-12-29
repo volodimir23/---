@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <label for="length">Довжина:</label>
+    <input type="text" id="length">
+    <br><br>
+    <label for="width">Ширина:</label>
+    <input type="text" id="width">
+    <br><br>
+    <button onclick="calculate()">Обчислити</button>
+    <br><br>
+    <p>Периметр: <span id="perimeter"></span></p>
+    <p>Площа: <span id="area"></span></p>
+    <p>Довжина діагоналі: <span id="diagonal"></span></p>
+
+    <script>
+       function calculate() {
+    const length = parseFloat(document.getElementById('length').value);
+    const width = parseFloat(document.getElementById('width').value);
+
+    if (!isNaN(length) && !isNaN(width)) {
+        const perimeter = 2 * (length + width);
+        const area = length * width;
+        const diagonal = Math.sqrt(length**2 + width**2);
+
+        document.getElementById('perimeter').textContent = perimeter;
+        document.getElementById('area').textContent = area;
+        document.getElementById('diagonal').textContent = diagonal;
+    } else {
+        alert("Please enter valid numerical values for length and width.");
+    }
+}
+    </script>
+</body>
+</html>

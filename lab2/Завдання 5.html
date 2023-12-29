@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Реалізувати і дослідити роботу наступних методів:</h1>
+    <p>console.log(), console.warn(), console.error(), .console.dir(), console.dirxml(), console.time(), console.timeEnd(), console.profile(), console.profileEnd(); console.assert(). </p>
+    <script>
+        console.log("Інформаційне повідомлення");
+        console.warn("Потенційна проблема, будьте обережні!")
+        console.error("Це приклад повідомлення про помилку.");
+        let дані = [1,2,3,4,5];
+        console.dir(дані);
+        console.dirxml(document.head);
+        console.time("Час виконання");
+            for (let i = 0; i < 100; i++) {
+            }      
+        console.timeEnd("Час виконання");
+        function власнаФункція() {
+            console.log("Функція для профілювання");
+        }
+        console.profile("Профілювання функції");
+        власнаФункція();
+        console.profileEnd("Профілювання функції");
+        console.assert(20 - 15 === 7, "Двадцять мінус п'ятнадцять не дорівнює сім");
+    </script>
+</body>
+</html>

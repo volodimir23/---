@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання №1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <input type="number" id="inputTime" placeholder="введіть час">
+    <select id="timeUnit">
+        <option value="seconds">Секунди</option>
+        <option value="minutes">Хвилини</option>
+        <option value="hours">Години</option>
+    </select>
+    <button onclick="addTime()">Додати час</button>
+    <button onclick="displayTime()">Показати час</button>
+
+    <div id="output"></div>
+
+    <script>
+        let currentTime = {
+            hours: 0,
+            minutes: 0,
+            seconds: 0
+        };
+
+        function displayTime() {
+            document.getElementById('output').innerHTML = `Поточний час: ${currentTime.hours}:${currentTime.minutes}:${currentTime.seconds}`;
+        }
+
+        function addTime() {
+            const inputTime = parseInt(document.getElementById('inputTime').value) || 0;
+            const timeUnit = document.getElementById('timeUnit').value;
+            
+            let totalSeconds = currentTime.hours * 3600 + currentTime.minutes * 60 + currentTime.seconds;
+
+            if (timeUnit === 'seconds') {
+                totalSeconds += inputTime;
+            } else if (timeUnit === 'minutes') {
+                totalSeconds += inputTime * 60;
+            } else if (timeUnit === 'hours') {
+                totalSeconds += inputTime * 3600;
+            }
+
+            currentTime.hours = Math.floor(totalSeconds / 3600) % 24;
+            currentTime.minutes = Math.floor((totalSeconds % 3600) / 60);
+            currentTime.seconds = totalSeconds % 60;
+
+            displayTime();
+        }
+    </script>
+</body>
+</html>

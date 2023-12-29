@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <h2>Завдання 1.1</h2>
+    <p>Виведення чисел в оберненому порядку</p>
+    <input type="text" id="task1.1-in" />
+    <button onclick="fun1_1()">Обернути</button>
+    <p id="task1.1-out">Результат:</p>
+
+    <h2>Завдання 1.2</h2>
+    <p>Виведення чисел без 0</p>
+    <input type="text" id="task1.2-in" />
+    <button onclick="fun1_2()">Видалити нулі</button>
+    <p id="task1.2-out">Результат:</p>
+
+    <h2>Завдання 1.3</h2>
+    <p>Виведення тексту в оберненому порядку</p>
+    <input type="text" id="task1.3" placeholder="Введіть текст" />
+    <button onclick="fun1_4()">Перевернути</button>
+    <p id="task1.3_out">Результат:</p>
+
+    <h2>Завдання 1.4</h2>
+    <p>a) друге і третє слово поміняти місцями;</p>
+    <p>b) пропуски замінені на коми.</p>
+    <p id="task1.4">Я не люблю морозиво</p>
+    <button onclick="fun1_5()">Здійснити зміни</button>
+
+    <script>
+      function fun1_1() {
+        let a = document.getElementById("task1.1-in").value;
+        let b = a.split("").reverse().join("");
+        document.getElementById("task1.1-out").innerHTML = "Результат: " + b;
+      }
+
+      function fun1_2() {
+        let a = document.getElementById("task1.2-in").value;
+        let b = a.split("0").join("");
+        document.getElementById("task1.2-out").innerHTML = "Результат: " + b;
+      }
+
+      function fun1_4() {
+        let a = document.getElementById("task1.3").value;
+        let b = a.split("").reverse().join("");
+        document.getElementById("task1.3_out").innerHTML = "Результат: " + b;
+      }
+
+      function fun1_5() {
+        let a = document.getElementById("task1.4").innerHTML;
+        let b = a.split(" ");
+        let c = b[1];
+        b[1] = b[2];
+        b[2] = c;
+        let d = b.join(",");
+        document.getElementById("task1.4").innerHTML = d;
+      }
+    </script>
+  </body>
+</html>

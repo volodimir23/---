@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h2>Впровадьте та вивчіть метод console.log() для таких випадків:</h2>
+    <p>вивести залишок від ділення одного числа на інше</p><br>
+    <p>вивести логічне значення (true/false) для перевірки, чи залишок від ділення одного числа на інше дорівнює нулю;</p><br>
+    <p>комбінований вивід тексту та значень попередньо визначеного масиву з використанням керуючих послідовностей %2, %d, %s.</p>
+    <script>   
+         let n1 = 10, n2 = 3, r = n1 % n2;
+         console.log("Remainder of " + n1 + " divided by " + n2 + " is " + r);
+         let b = (r === 0);
+         console.log("Remainder is zero: " + b);
+         let a = [10, "banner", "Victor"];
+         console.log("Combined text output: %d, %s, %s", a[0], a[1], a[2]);
+    </script>
+</body>
+</html>

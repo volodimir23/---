@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+  <style>
+    div.hover {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <p>DOM first!</p>
+  <div>Це div-елемент</div>
+  <p>DOM last!</p>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("p:first").text("DOM first!");
+      jQuery("p:last").text("DOM last!");
+
+      $("div").hover(function(){
+        $(this).addClass("hover");
+      }, function(){
+        $(this).removeClass("hover");
+      });
+    });
+  </script>
+</body>
+</html>

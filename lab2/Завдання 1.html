@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #c{
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            border: 2px solid #333;
+            padding: 10px; 
+            border-radius: 10px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div id="c"></div>
+    <script>
+        function obfuscatedClock() {
+            n = new Date();
+            y = n.getFullYear();
+            m = n.getMonth() + 1;
+            d = n.getDate();
+            h = n.getHours();
+            mi = n.getMinutes();
+            s = n.getSeconds();
+            m = m < 10 ? '0' + m : m;
+            d = d < 10 ? '0' + d : d;
+            h = h < 10 ? '0' + h : h;
+            mi = mi < 10 ? '0' + mi : mi;
+            s = s < 10 ? '0' + s : s;
+            t = `${y}#${m}#${d}-${h}#${mi}#${s}`;
+            document.getElementById('c').textContent = t;
+            setTimeout(obfuscatedClock, 1000);
+        }
+        obfuscatedClock();
+    </script>
+</body>
+</html>

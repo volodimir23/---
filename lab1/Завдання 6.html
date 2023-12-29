@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        let continent = new Array(6);
+        continent[0] = "Євразія";
+        continent[1] = "Африка";
+        continent[2] = "Північна Америка";
+        continent[3] = "Південна Америка";
+        continent[4] = "Антарктида";
+        continent[5] = "Австралія";
+        
+        let density = new Array(6);
+        density[0] = 99.8 ;
+        density[1] = 42.12;
+        density[2] = 22.9;
+        density[3] = 21.4;
+        density[4] = 0.0003;
+        density[5] = 3.3;
+        
+        let area = new Array(6);
+        area[0] = 54759000;
+        area[1] = 30271000;
+        area[2] = 24930000;
+        area[3] = 17843000;
+        area[4] = 14200000;
+        area[5] = 7688287;
+        
+        function fun1() { 
+          let inputElement = document.getElementById("input_continent");
+          let populationDensityElement = document.getElementById("population_density");
+          let areaElement = document.getElementById("area");
+          let continentName = inputElement.value;
+          selectedContinentIndex = continent.indexOf(continentName);
+          
+          let continentDensity = density[selectedContinentIndex];
+          let continentArea = area[selectedContinentIndex];
+          
+          populationDensityElement.value = `Густина населення: ${continentDensity} осіб/км²`;
+          areaElement.value = `Площа: ${continentArea} км²`;
+        }
+        
+        function fun2() { 
+          if (selectedContinentIndex !== -1) {
+            let population = density[selectedContinentIndex] * area[selectedContinentIndex];
+            let populationElement = document.getElementById("population");
+            populationElement.value = `Населення: ${population.toFixed(2)} осіб`;
+          }
+        }
+    </script>
+    
+</head>
+<body>
+<form name="entryForm">
+  Введіть назву континенту:
+  <input type="text" id="input_continent" /><br />
+  <input type="button" onClick="fun1();" value="Густина і площа" />
+  <input type="button" onClick="fun2();" value="Населення" />
+  <br />Результати: <br />
+  <label for="population_density" ></label>
+  <input type="text" id="population_density" size="25"/><br />
+  <label for="area" size="70"></label>
+  <input type="text" id="area" size="25" /><br/>
+  <label for="population" ></label>
+  <input type="text" id="population" size="25"/>
+</form>
+</body>
+</html>

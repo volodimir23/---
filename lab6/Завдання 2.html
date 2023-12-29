@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма реєстрації</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        span {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        button {
+            background-color: #808080; /* Gray color */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #696969; /* Darker gray on hover */
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <label for="email">Електронна пошта:</label>
+        <input type="text" id="email" name="email"><span id="emailError"></span>
+
+        <label for="name">Повне ім'я:</label>
+        <input type="text" id="name" name="name"><span id="nameError"></span>
+
+        <label for="login">Ім'я користувача:</label>
+        <input type="text" id="login" name="login"><span id="loginError"></span>
+
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password"><span id="passwordError"></span>
+
+        <label for="postalCode">Поштовий індекс:</label>
+        <input type="text" id="postalCode" name="postalCode"><span id="postalCodeError"></span>
+
+        <button type="button" onclick="validateForm()">Зареєструватися</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            const email = document.getElementById("email").value;
+    const name = document.getElementById("name").value;
+    const login = document.getElementById("login").value;
+    const password = document.getElementById("password").value;
+    const postalCode = document.getElementById("postalCode").value;
+
+    const emailRegex =  /^([a-z0-9]+)(\.[a-z0-9]+)@pnu\.edu\.ua$/i;
+    const nameRegex = /^([A-ZА-ЯІ][a-zа-яі]+[\s])([A-ZА-ЯІ]+)$/;
+    const loginRegex = /^[a-zA-Z]+$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[-_!@#$%^&*]).{8,}$/;
+    const postalCodeRegex = /^\d{5}$/;
+
+    if (email.match(emailRegex)) {
+        document.getElementById("emailError").innerText = "✓";
+        document.getElementById("emailError").style.color = "green";
+    } else {
+        document.getElementById("emailError").innerText = "Введіть правильну адресу e-mail";
+        document.getElementById("emailError").style.color = "red";
+    }
+
+    if (name.match(nameRegex)) {
+        document.getElementById("nameError").innerText = "✓";
+        document.getElementById("nameError").style.color = "green";
+    } else {
+        document.getElementById("nameError").innerText = "Введіть ім'я та прізвище в правильному форматі";
+        document.getElementById("nameError").style.color = "red";
+    }
+
+    if (login.match(loginRegex)) {
+        document.getElementById("loginError").innerText = "✓";
+        document.getElementById("loginError").style.color = "green";
+    } else {
+        document.getElementById("loginError").innerText = "Логін повинен містити лише латинські букви";
+        document.getElementById("loginError").style.color = "red";
+    }
+
+    if (password.match(passwordRegex)) {
+        document.getElementById("passwordError").innerText = "✓";
+        document.getElementById("passwordError").style.color = "green";
+    } else {
+        document.getElementById("passwordError").innerText = "Пароль повинен містити щонайменше 8 символів, букву, цифру та спецсимвол _-!@#$%^&*";
+        document.getElementById("passwordError").style.color = "red";
+    }
+
+    if (postalCode.match(postalCodeRegex)) {
+        document.getElementById("postalCodeError").innerText = "✓";
+        document.getElementById("postalCodeError").style.color = "green";
+    } else {
+        document.getElementById("postalCodeError").innerText = "Поштовий індекс повинен складатися з 5 цифр";
+        document.getElementById("postalCodeError").style.color = "red";
+    }
+}        
+    </script>
+</body>
+</html>

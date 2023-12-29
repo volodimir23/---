@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рослинний Квіз</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        legend {
+            font-weight: bold;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        select {
+            width: 100%;
+            height: 100px;
+            margin-top: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        #totalScore {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form id="quizForm">
+        <fieldset>
+            <legend>Питання 1: Яка функція вихлопної системи автомобіля?</legend>
+            <input type="checkbox" name="q1[]" value="a" id="q1a"><label for="q1a">a) Виведення викидів гарячих газів</label><br>
+            <input type="checkbox" name="q1[]" value="b" id="q1b"><label for="q1b">b) Забезпечення безпеки пасажирів</label><br>
+            <input type="checkbox" name="q1[]" value="c" id="q1c"><label for="q1c">c) Збільшення швидкості руху</label><br>
+            <input type="checkbox" name="q1[]" value="d" id="q1d"><label for="q1d">d) Забезпечення паливної економії</label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Питання 2: Що показує показник RPM на приладовій панелі автомобіля?</legend>
+            <input type="checkbox" name="q2[]" value="a" id="q2a"><label for="q2a">a) Оберти колінчастого вала за хвилину</label><br>
+            <input type="checkbox" name="q2[]" value="b" id="q2b"><label for="q2b">b) Рівень пального в баку</label><br>
+            <input type="checkbox" name="q2[]" value="c" id="q2c"><label for="q2c">c) Температура двигуна</label><br>
+            <input type="checkbox" name="q2[]" value="d" id="q2d"><label for="q2d">d) Кількість пройдених кілометрів</label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Питання 3: Звідки автомобіль отримує електроенергію для запуску двигуна?</legend>
+            <input type="radio" name="q3" value="a" id="q3a"><label for="q3a">a)  Батарея</label><br>
+            <input type="radio" name="q3" value="b" id="q3b"><label for="q3b">b)  Бензобак</label><br>
+            <input type="radio" name="q3" value="c" id="q3c"><label for="q3c">c)  Генератор</label><br>
+            <input type="radio" name="q3" value="d" id="q3d"><label for="q3d">d)  Масляний фільтр</label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Питання 4: Які основні функції масла в двигуні автомобіля?</legend>
+            <input type="radio" name="q4" value="a" id="q4a"><label for="q4a">a) Зменшення тертя та зносу</label><br>
+            <input type="radio" name="q4" value="b" id="q4b"><label for="q4b">b) Запуск двигуна</label><br>
+            <input type="radio" name="q4" value="c" id="q4c"><label for="q4c">c) Охолодження двигуна</label><br>
+            <input type="radio" name="q4" value="d" id="q4d"><label for="q4d">d) Підвищення тиску в шинах</label><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Питання 5: Які частини тормозної системи відповідають за стискання гальмівних колодок?</legend>
+            <select name="q5[]" multiple>
+                <option value="Тормозний гальмівний циліндр">a) Тормозний гальмівний циліндр</option>
+                <option value="Гідравлічний гальмівний бачок">b) Гідравлічний гальмівний бачок</option>
+                <option value="Тормозні шланги">c) Тормозні шланги</option>
+                <option value="Робочий циліндр">d) Робочий циліндр</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Питання 6: Яка функція виконується генератором у системі автомобільного двигуна?</legend>
+            <select name="q6[]" multiple>
+                <option value="Постачання електроенергії">a) Постачання електроенергії для споживачів та зарядка батареї </option>
+                <option value="Забезпечення запалення">b) Забезпечення запалення</option>
+                <option value="Споживання пального">c) Споживання пального</option>
+                <option value="Контроль тиску масла">d) Контроль тиску масла</option>
+            </select>
+        </fieldset>
+
+        <fieldset>
+            <legend>Питання 7: Чим заводять авто?</legend>
+            <label for="q7">Ваша відповідь:</label>
+            <input type="text" name="q7" id="q7">
+        </fieldset>
+        
+        <button type="button" onclick="calculateResults()">Перевірити відповіді</button>
+    </form>
+
+    <table id="resultsTable" style="display:none">
+        <tr>
+            <td>Питання</td>
+            <td>Відповіді</td>
+            <td>Бали</td>
+        </tr>
+    </table>
+    
+    <p id="totalScore" style="display:none">Загальний бал: 0</p>
+
+    <script>
+        function calculateResults() {
+        let totalScore = 0;
+        const resultsTable = document.getElementById('resultsTable');
+        const totalScoreElement = document.getElementById('totalScore');
+    
+        resultsTable.style.display = 'table';
+        totalScoreElement.style.display = 'block';
+    
+        while (resultsTable.rows.length > 1) {
+            resultsTable.deleteRow(1);
+        }
+    
+        function addRow(questionNumber, answer, score) {
+            const newRow = resultsTable.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            cell1.innerHTML = questionNumber;
+            cell2.innerHTML = answer;
+            cell3.innerHTML = score;
+            totalScore += score;
+        }
+    
+        function getSelectedValues(options) {
+            const selectedValues = [];
+            for (const option of options) {
+                if (option.selected) {
+                    selectedValues.push(option.value);
+                }
+            }
+            return selectedValues.join(', ');
+        }
+    
+        const q1Answers = document.getElementsByName('q1[]');
+        let q1Score = 0;
+        let correctAnswersCount1 = 0;
+        let incorrectAnswersCount1 = 0;
+        const q1SelectedAnswers = [];
+    
+        for (const answer of q1Answers) {
+            if (answer.checked) {
+                q1SelectedAnswers.push(answer.value);
+                if (answer.value === 'a' || answer.value === 'b') {
+                    correctAnswersCount1++;
+                } else {
+                    incorrectAnswersCount1++;
+                }
+            }
+        }
+    
+        if (correctAnswersCount1 === 2 && incorrectAnswersCount1 === 0) {
+            q1Score = 2;
+        } else if (correctAnswersCount1 === 1 && incorrectAnswersCount1 === 1) {
+            q1Score = 1;
+        } else if (correctAnswersCount1 === 4) {
+            q1Score = 0;
+        }
+    
+        addRow("Питання 1: Яка функція вихлопної системи автомобіля?", q1SelectedAnswers.join(', '), q1Score);
+    
+        const q2Answers = document.getElementsByName('q2[]');
+        let q2Score = 0;
+        let correctAnswersCount2 = 0;
+        let incorrectAnswersCount2 = 0;
+        const q2SelectedAnswers = [];
+    
+        for (const answer of q2Answers) {
+            if (answer.checked) {
+                q2SelectedAnswers.push(answer.value);
+                if (answer.value === 'a' || answer.value === 'b') {
+                    correctAnswersCount2++;
+                } else {
+                    incorrectAnswersCount2++;
+                }
+            }
+        }
+    
+        if (correctAnswersCount2 === 2 && incorrectAnswersCount2 === 0) {
+            q2Score = 2;
+        } else if (correctAnswersCount2 === 1 && incorrectAnswersCount2 === 1) {
+            q2Score = 1;
+        } else if (correctAnswersCount2 === 4) {
+            q2Score = 0;
+        }
+    
+        addRow("Питання 2: Що показує показник RPM на приладовій панелі автомобіля?", q2SelectedAnswers.join(', '), q2Score);
+    
+        const q3Answer = document.querySelector('input[name="q3"]:checked');
+        let q3Score = 0;
+        let q3SelectedAnswer = "";
+    
+        if (q3Answer) {
+            q3SelectedAnswer = q3Answer.value;
+            if (q3Answer.value === 'a') {
+                q3Score = 1;
+            }
+        }
+    
+        addRow("Питання 3: Звідки автомобіль отримує електроенергію для запуску двигуна?", q3SelectedAnswer, q3Score);
+    
+        const q4Answer = document.querySelector('input[name="q4"]:checked');
+        let q4Score = 0;
+        let q4SelectedAnswer = "";
+    
+        if (q4Answer) {
+            q4SelectedAnswer = q4Answer.value;
+            if (q4Answer.value === 'a') {
+                q4Score = 1;
+            }
+        }
+    
+        addRow("Питання 4: Які основні функції масла в двигуні автомобіля?", q4SelectedAnswer, q4Score);
+    
+        const q5Answers = document.querySelector('select[name="q5[]"]').selectedOptions;
+        let q5Score = 0;
+        let correctAnswersCount5 = 0;
+        let incorrectAnswersCount5 = 0;
+        const q5SelectedAnswers = [];
+    
+        for (const option of q5Answers) {
+            q5SelectedAnswers.push(option.value);
+            if (option.value === 'Тормозний гальмівний циліндр' || option.value === 'Тормозні шланги') {
+                correctAnswersCount5++;
+            } else {
+                incorrectAnswersCount5++;
+            }
+        }
+    
+        if (correctAnswersCount5 === 2 && incorrectAnswersCount5 === 0) {
+            q5Score = 2;
+        } else if (correctAnswersCount5 > 0 && incorrectAnswersCount5 === 0) {
+            q5Score = 1;
+        } else if (correctAnswersCount5 === 4) {
+            q5Score = 0;
+        }
+    
+        addRow("Питання 5: Які частини тормозної системи відповідають за стискання гальмівних колодок?", q5SelectedAnswers.join(', '), q5Score);
+    
+        const q6Answers = document.querySelector('select[name="q6[]"]').selectedOptions;
+        let q6Score = 0;
+        let correctAnswersCount6 = 0;
+        let incorrectAnswersCount6 = 0;
+        const q6SelectedAnswers = [];
+    
+        for (const option of q6Answers) {
+            q6SelectedAnswers.push(option.value);
+            if (option.value === 'Постачання електроенергії для споживачів та зарядка батареї' || option.value === ' Контроль тиску масла') {
+                correctAnswersCount6++;
+            } else {
+                incorrectAnswersCount6++;
+            }
+        }
+    
+        if (correctAnswersCount6 === 2 && incorrectAnswersCount6 === 0) {
+            q6Score = 2;
+        } else if (correctAnswersCount6 > 0 && incorrectAnswersCount6 === 0) {
+            q6Score = 1;
+        } else if (correctAnswersCount6 === 4) {
+            q6Score = 0;
+        }
+    
+        addRow("Питання 6: Яка функція виконується генератором у системі автомобільного двигуна?", q6SelectedAnswers.join(', '), q6Score);
+    
+        const q7Answer = document.getElementById('q7').value.trim();
+        let q7Score = 0;
+    
+        if (q7Answer.toLowerCase() === 'ключом') {
+            q7Score = 1;
+        }
+    
+        addRow("Питання 7: Чим заводять авто?", q7Answer, q7Score);
+    
+        totalScoreElement.innerHTML = 'Загальний бал: ' + totalScore;
+    }
+    </script>
+</body>
+</html>

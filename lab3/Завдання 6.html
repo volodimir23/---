@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <script>
+    let isSubMenuVisible = false;
+    let isSubbMenuVisible = false;
+
+    function initialize() {
+        var content = "";
+        content += "<a href='javascript:toggleSubMenu()'>fruits</a><br>";
+        content += "<div id='subMain'></div>";
+        content += "<a href='javascript:toggleSubbMenu()'>vegetables</a>";
+        content += "<div id='subbMain'></div>";
+        document.getElementById("container").innerHTML = content;
+    }
+
+    function toggleSubMenu() {
+        var subMenuContent = "";
+        if (!isSubMenuVisible) {
+            subMenuContent += "apple<br>";
+            subMenuContent += "pineapple<br>";
+            subMenuContent += "apricot<br>";
+            subMenuContent += "pear<br>";
+            subMenuContent += "lemon";
+        }
+        isSubMenuVisible = !isSubMenuVisible;
+        document.getElementById("subMain").innerHTML = subMenuContent;
+    }
+
+    function toggleSubbMenu() {
+        var subbMenuContent = "";
+        if (!isSubbMenuVisible) {
+            subbMenuContent += "potatoes<br>";
+            subbMenuContent += "beetroot<br>";
+            subbMenuContent += "carrots<br>";
+            subbMenuContent += "pear";
+        }
+        isSubbMenuVisible = !isSubbMenuVisible;
+        document.getElementById("subbMain").innerHTML = subbMenuContent;
+    }
+  </script>
+  </head>
+  <body onload="initialize()">
+    <div id="container"></div>
+  </body>
+</html>

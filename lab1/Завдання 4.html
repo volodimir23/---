@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<form id="main_form">
+    x<input type="text" id="t_x" value="10"><br>
+    y<input type="text" id="t_y" value="-2"><br>
+    Результат<input type="text" id="t_result" value=""><br>
+    <input type="button" onclick="F()" value="Розрахувати">
+</form>
+</body>
+<script>
+    function F(){
+        let x,y,result;
+        x=parseInt(document.getElementById('t_x').value);
+        y=parseInt(document.getElementById('t_y').value);
+        if(Math.pow(x,2)>3){
+            result=Math.pow(x,3)-Math.sqrt(x);
+        }
+        else if((x>0)&&(y<0)){
+            result=x*y;
+        }
+        else{
+            result=x+y+(x*y)-(x/y);
+        }
+        document.getElementById('t_result').value = "" + result;
+    }
+    </script>
+</html>
