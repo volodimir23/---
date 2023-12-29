@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання 6</title>
+    <style>
+      .ball {
+        background-color: red;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      .start_animation {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 50px;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="start_animation">Start Animation</button>
+    <div class="ball"></div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".start_animation").click(function () {
+          var originalHeight = $(".ball").height();
+          var originalWidth = $(".ball").width();
+          $(".ball").css({ top: "0px", left: "0px" });
+          $(".ball").animate(
+            { top: "300px" },
+            {
+              duration: 2000,
+              easing: "easeOutBounce",
+              step: function (now, fx) {
+                if (fx.prop === "top" && now >= 290) {
+                  $(this).height(originalHeight * 0.8);
+                  $(this).width(originalWidth * 1.2);
+                }
+                if (fx.prop === "top" && now < 290) {
+                  $(this).height(originalHeight);
+                  $(this).width(originalWidth);
+                }
+              },
+              complete: function () {
+                $(this).height(originalHeight);
+                $(this).width(originalWidth);
+              },
+              queue: false,
+            }
+          );
+          $(".ball").animate({ left: "200px" }, 2000);
+        });
+      });
+    </script>
+  </body>
+</html>

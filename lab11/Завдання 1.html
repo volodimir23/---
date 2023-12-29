@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання 1</title>
+    <style>
+      .red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cценарії, які демонструють виконання</h1>
+    <h3>- .html()</h3>
+    <p id="html"><b>Нажміть,</b> щоб змінити на <span>html</span></p>
+    <hr />
+    <h3>- .css()</h3>
+    <p id="css">Нажміть, щоб змінити колір</p>
+    <hr />
+    <h3>- .val()</h3>
+    <input class="val-input" type="text" value="текст" />
+    <p class="val"></p>
+    <hr />
+    <h3>
+      - .attr (ім'я атрибута), .attr (ім'я атрибута, значення), .attr
+      (атрибути), .attr (ім'я атрибута, функція), .removeAttr()
+    </h3>
+    <p>- .attr (ім'я атрибута)</p>
+    <input type="checkbox" name="" id="attr_name_input" />
+    <p class="attr_name"></p>
+    <p>.attr (ім'я атрибута, значення)</p>
+    <input type="text" id="attr_nameValue_name" placeholder="name" />
+    <input type="text" id="attr_nameValue_value" placeholder="value" />
+    <button id="attr_nameValue">Змінити</button>
+    <p id="attr_nameValue_text">текст</p>
+    <p>.attr (атрибути)</p>
+    <button id="attr">Змінити атрибути</button>
+    <input id="attr_text" />
+    <p>.attr (ім'я атрибута, функція)</p>
+    <button id="attr_function">Змінити атрибути</button>
+    <input id="attr_function_text" value="old" />
+    <p>.removeAttr()</p>
+    <button id="removeAttr">Видалити атрибут</button>
+    <input id="removeAttr_text" value="old" />
+    <hr />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#html").click(function () {
+          let htmlString = $(this).html();
+          $(this).text(htmlString);
+        });
+        $("#css").click(function () {
+          $(this).css("color", "red");
+        });
+        $(".val-input")
+          .keyup(function () {
+            let value = $(this).val();
+            $(".val").text(value);
+          })
+          .trigger("keyup");
+        $("#attr_name_input").click(function () {
+          let attrName = "type: " + $(this).attr("type");
+          $(".attr_name").text(attrName);
+        });
+        $("#attr_nameValue").click(function () {
+          let name = $("#attr_nameValue_name").val();
+          let value = $("#attr_nameValue_value").val();
+          $("#attr_nameValue_text").attr(name, value);
+        });
+        $("#attr").click(function () {
+          $("#attr_text").attr({
+            name: "name",
+            value: "value",
+          });
+        });
+        $("#attr_function").click(function () {
+          $("#attr_function_text").attr("value", function (i, origValue) {
+            return origValue + " " + "new";
+          });
+        });
+        $("#removeAttr").click(function () {
+          $("#removeAttr_text").removeAttr("value");
+        });
+      });
+    </script>
+  </body>
+</html>

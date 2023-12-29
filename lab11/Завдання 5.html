@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання 5</title>
+    <style>
+      .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .wrapper p {
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 100px;
+        font-size: 20px;
+      }
+      .wrapper p.active {
+        background-color: #f00;
+      }
+      .filter {
+        width: 100%;
+        height: 30px;
+        margin-top: 20px;
+        padding: 0 10px;
+        box-sizing: border-box;
+      }
+      .btn {
+        width: 100%;
+        height: 30px;
+        margin-top: 20px;
+        padding: 0 10px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Демонстрація методів .grep() та .makeArray()</h1>
+    <div class="wrapper">
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+      <p>5</p>
+      <p>6</p>
+      <p>7</p>
+      <p>8</p>
+      <p>9</p>
+    </div>
+    <input type="text" class="filter" />
+    <button class="btn">Фільтрувати</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".btn").click(function () {
+          let filter = $(".filter").val();
+          let arr = $.makeArray($(".wrapper p"));
+          arr = $.grep(arr, function (n) {
+            return $(n).text() !== filter;
+          });
+          $(".wrapper").empty().append(arr);
+        });
+      });
+    </script>
+  </body>
+</html>

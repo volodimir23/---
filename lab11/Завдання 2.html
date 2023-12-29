@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання 2</title>
+    <style>
+      #div1 {
+        border: 1px solid black;
+        padding: 5px;
+        width: 200px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Сценарії, які демонструють результат виконання наступних методів</h1>
+    <h3>.wrap()</h3>
+    <h3>.replaceAll()</h3>
+    <h3>.innerHeight(функция) ; .outerHeight()</h3>
+    <hr />
+    <p id="wrapped">Текст</p>
+    <button id="wrap">wrap()</button>
+    <hr />
+    <p class="wrap_text">текст</p>
+    <p class="wrap_text">текст</p>
+    <p class="wrap_text">текст</p>
+    <button id="replace">replaceAll()</button>
+    <hr />
+    <div id="div1">
+      <p>Текст</p>
+      <p>Текст</p>
+      <p>Текст</p>
+    </div>
+    <button id="inner">innerHeight()</button>
+    <button id="outer">outerHeight()</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#wrap").click(function () {
+          $("#wrapped").wrap("<b></b>");
+        });
+        $("#replace").click(function () {
+          $("<p>Замінений текст</p>").replaceAll(".wrap_text");
+        });
+        $("#inner").click(function () {
+          alert("innerHeight() = " + $("#div1").innerHeight());
+        });
+        $("#outer").click(function () {
+          alert("outerHeight() = " + $("#div1").outerHeight());
+        });
+      });
+    </script>
+  </body>
+</html>
