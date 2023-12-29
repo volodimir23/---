@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання 4</title>
+  </head>
+  <body>
+    <div class="modify">Елемент 1</div>
+    <div class="">Елемент 2</div>
+    <div class="modify">Елемент 3</div>
+
+    <ul>
+      <li>Пункт 1</li>
+      <li>Пункт 2</li>
+      <li>Пункт 3</li>
+      <li>Пункт 4</li>
+      <li>Пункт 5</li>
+      <li>Пункт 6</li>
+    </ul>
+    <button class="filter_class_button">Виконати для класу</button>
+    <button class="filter_li_button">Виконати для li</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".filter_class_button").click(function () {
+          $(".modify").filter(function () {
+            if (!$(this).hasClass("modified")) {
+              $(this)
+                .css("color", "red")
+                .append(" modify")
+                .addClass("modified");
+            }
+          });
+        });
+
+        $(".filter_li_button").click(function () {
+          $("li")
+            .filter(function (index) {
+              return index % 3 === 2;
+            })
+            .filter(function () {
+              if (!$(this).hasClass("modified")) {
+                $(this)
+                  .css("color", "blue")
+                  .append(" modify")
+                  .addClass("modified");
+              }
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

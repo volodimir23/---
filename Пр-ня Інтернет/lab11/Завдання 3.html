@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання 3</title>
+    <style>
+      .find {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+      }
+      .find span {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 50px;
+      }
+      .find_input {
+        margin: 10px 0;
+      }
+      .parent {
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+        position: relative;
+      }
+      .child {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+      }
+      .addback {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+      }
+      .addback div {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        text-align: center;
+        line-height: 50px;
+      }
+      .check_class_red {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+      }
+      .text {
+        margin: 10px 0;
+      }
+      .parentUntil {
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+      }
+      .child1 {
+        width: 175px;
+        height: 175px;
+        border: 1px solid black;
+      }
+      .child2 {
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+      }
+      .child3 {
+        width: 125px;
+        height: 125px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Реалізація методів</h1>
+    <h3>.find()</h3>
+    <h3>.offsetParent()</h3>
+    <h3>.addBack()</h3>
+    <h3>.is()</h3>
+    <h3>.parentsUntil()</h3>
+    <hr />
+    <div class="find">
+      <span class="find1">1</span>
+      <span class="find2">2</span>
+      <span class="find3">3</span>
+      <span class="find4">4</span>
+      <span class="find5">5</span>
+      <span class="find6">6</span>
+      <span class="find7">7</span>
+      <span class="find8">8</span>
+      <span class="find9">9</span>
+    </div>
+    <input type="text" class="find_input" />
+    <button class="find_button">find()</button>
+    <hr />
+    <div class="parent">
+      <div class="child">
+        <p>child</p>
+      </div>
+    </div>
+    <button class="offset_button">offsetParent()</button>
+    <hr />
+    <div class="addback">
+      <div class="addback1">1</div>
+      <div class="addback2">2</div>
+      <div class="addback3">3</div>
+      <div class="addback4">4</div>
+      <div class="addback5">5</div>
+      <div class="addback6">6</div>
+      <div class="addback7">7</div>
+      <div class="addback8">8</div>
+      <div class="addback9">9</div>
+    </div>
+    <button class="addback_button">addBack()</button>
+    <hr />
+    <div class="check_class_red"></div>
+    <p class="text">
+      class red?
+      <span class="result"></span>
+    </p>
+    <button class="is_button">is()</button>
+    <hr />
+    <div class="parentUntil">
+      parentUntil
+      <div class="child1">
+        child1
+        <div class="child2">
+          child2
+          <div class="child3">child3</div>
+        </div>
+      </div>
+    </div>
+    <button class="parentsUntil_button">parentsUntil()</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".find_button").click(function () {
+          var find_input = ".find" + $(".find_input").val();
+          $(".find").find(find_input).css("background-color", "red");
+        });
+        $(".offset_button").click(function () {
+          $(".child").offsetParent().css("background-color", "red");
+        });
+        $(".addback_button").click(function () {
+          $(".addback9")
+            .siblings()
+            .addBack()
+
+            .css({ "background-color": "red" });
+        });
+        $(".is_button").click(function () {
+          if ($(".check_class_red").is(".check_class_red")) {
+            $(".result").text("yes");
+          } else {
+            $(".result").text("no");
+          }
+        });
+        $(".parentsUntil_button").click(function () {
+          $(".child3")
+            .parentsUntil(".parentUntil")
+            .css("background-color", "red");
+        });
+      });
+    </script>
+  </body>
+</html>
